@@ -1,5 +1,4 @@
-import * as fc from "fast-check";
-import { pre } from "fast-check";
+// import * as fc from "fast-check";
 
 import { ChristmasLights } from "./christmas-lights";
 import { Position } from "./position";
@@ -11,15 +10,17 @@ describe("Christmas Lights Tests", () => {
     christmasLights = new ChristmasLights(1_000, 1_000);
   });
 
-  // it("", () => {
+  // it("Given one square to ligth on, brightness should be equal to square length times square width", () => {
+  //   const numberFrom0To999: fc.Arbitrary<number> = fc.nat({ max: 999 });
+
   //   fc.assert(
   //     fc.property(
-  //       fc.nat({ max: 999 }),
-  //       fc.nat({ max: 999 }),
-  //       fc.nat({ max: 999 }),
-  //       fc.nat({ max: 999 }),
+  //       numberFrom0To999,
+  //       numberFrom0To999,
+  //       numberFrom0To999,
+  //       numberFrom0To999,
   //       (startX, startY, endX, endY) => {
-  //         pre(startX <= endX && startY <= endY);
+  //         fc.pre(startX <= endX && startY <= endY);
   //         const christmasLights = new ChristmasLights(1_000, 1_000);
 
   //         const startPos = Position.create({ x: startX, y: startY });
@@ -28,13 +29,14 @@ describe("Christmas Lights Tests", () => {
   //         christmasLights.turnOn(startPos, endPos);
   //         const brightness = christmasLights.getBrightness();
 
-  //         const diffX = endX - startX + 1;
-  //         const diffY = endY - startY + 1;
-  //         expect(brightness).toEqual(diffX * diffY);
+  //         const width = endX - startX + 1;
+  //         const length = endY - startY + 1;
+  //         expect(brightness).toEqual(width * length);
   //       }
   //     )
   //   );
   // });
+
   it("On(0,0)->(0,0) === 1 brightness", () => {
     const startPos = Position.create({ x: 0, y: 0 });
     const endPos = Position.create({ x: 0, y: 0 });
