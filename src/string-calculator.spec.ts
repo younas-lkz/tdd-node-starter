@@ -56,6 +56,7 @@ describe("String Calculator", () => {
         integerArrayBuilder,
         separatorBuilder,
         (eachNumber, separator) => {
+          fc.pre(separator !== "-" && isNaN(+separator));
           const numbersString = generateSeparatedNumbers(
             eachNumber,
             () => separator

@@ -25,7 +25,7 @@ export class StringCalculator {
         this.numbers.indexOf("\n")
       );
       this.numbers = this.numbers.slice(
-        this.numbers.indexOf("\n") + 2,
+        this.numbers.indexOf("\n") + 1,
         this.numbers.length
       );
     } else {
