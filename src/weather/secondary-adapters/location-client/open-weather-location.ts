@@ -1,6 +1,6 @@
 import { HttpClient } from "../../../shared/secondary-ports/http-client/http-client.port";
 
-import { LocationClient } from "../../secondary-port/location/location-client.port";
+import { LocationClient } from "../../secondary-port/location-client/location-client.port";
 import { Location } from "../../models/location.model";
 
 import { ApiKeyMissingError } from "./api-key-missing.error";

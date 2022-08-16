@@ -1,5 +1,6 @@
+import { LocationClient } from "../../secondary-port/location-client/location-client.port";
+
 import { Weather } from "../../models/weather.model";
-import { LocationClient } from "../../secondary-port/location/location-client.port";
 
 export class GetCurrentWeatherByName {
   constructor(private readonly location: LocationClient) {}
