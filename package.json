@@ -22,6 +22,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "shallow-equal-object": "^1.1.1"
   }
 }

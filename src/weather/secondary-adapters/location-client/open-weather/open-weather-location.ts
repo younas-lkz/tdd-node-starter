@@ -4,6 +4,7 @@ import { LocationClient } from "../../../domain/secondary-ports/location-client/
 import { Location } from "../../../domain/models/location.model";
 
 import { ApiKeyMissingError } from "./api-key-missing.error";
+import { NoCityFoundError } from "./no-city-found.error";
 
 export class OpenWeatherLocation implements LocationClient {
   constructor(private readonly httpClient: HttpClient) {}
@@ -15,9 +16,15 @@ export class OpenWeatherLocation implements LocationClient {
       throw new ApiKeyMissingError();
     }
 
-    const openWeatherResult = this.httpClient.get<OpenWeatherResult>(
-      `geo/1.0/direct?q=${cityName}&limit=5&appid=${this.apiKey}`
-    );
+    const openWeatherResult = (
+      await this.httpClient.get<OpenWeatherResult>(
+        `geo/1.0/direct?q=${cityName}&limit=1&appid=${this.apiKey}`
+      )
+    ).at(0);
+
+    if (!openWeatherResult) {
+      throw new NoCityFoundError();
+    }
 
     return Location.create({
       latitude: openWeatherResult.lat,
@@ -30,7 +37,9 @@ export class OpenWeatherLocation implements LocationClient {
   }
 }
 
-export interface OpenWeatherResult {
+export type OpenWeatherResult = CityLocation[];
+
+interface CityLocation {
   lat: number;
   lon: number;
 }

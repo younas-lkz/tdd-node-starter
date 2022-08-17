@@ -21,10 +21,12 @@ describe("Open Weather Location", () => {
   describe("GIVEN the open weather location client", () => {
     describe("WHEN I call it with London", () => {
       it("THEN it should returns to me the London's coordinates", async () => {
-        const nextGetResult: OpenWeatherResult = {
-          lat: 51.509093,
-          lon: -0.094151,
-        };
+        const nextGetResult: OpenWeatherResult = [
+          {
+            lat: 51.509093,
+            lon: -0.094151,
+          },
+        ];
         deterministicHttpClient.setNextGetResult(nextGetResult);
         openWeatherLocation.setApiKey("this is an api key");
 
@@ -32,8 +34,8 @@ describe("Open Weather Location", () => {
           await openWeatherLocation.getCityLocationFromName("London");
 
         const expectedLocation = Location.create({
-          latitude: nextGetResult.lat,
-          longitude: nextGetResult.lon,
+          latitude: nextGetResult[0].lat,
+          longitude: nextGetResult[0].lon,
         });
         expect(resultLocation.equals(expectedLocation)).toBeTruthy();
       });

@@ -1,3 +1,3 @@
 export interface HttpClient {
-  get<Result>(uri: string): Result;
+  get<Result>(uri: string): Promise<Result>;
 }
