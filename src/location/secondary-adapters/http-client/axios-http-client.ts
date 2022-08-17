@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { HttpClient } from "../../domain/secondary-ports/http-client/http-client.port";
+import { HttpClient } from "../../domain/secondary-ports/http-client.port";
 
 export class AxiosHttpClient implements HttpClient {
   constructor(private readonly baseUrl: string) {}

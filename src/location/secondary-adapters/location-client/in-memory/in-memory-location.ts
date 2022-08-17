@@ -1,4 +1,4 @@
-import { LocationClient } from "../../../domain/secondary-ports/location-client/location-client.port";
+import { LocationClient } from "../../../domain/secondary-ports/location-client.port";
 
 import { Location } from "../../../domain/models/location.model";
 

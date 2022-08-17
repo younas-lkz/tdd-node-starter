@@ -1,9 +1,9 @@
 import readline from "readline";
 
-import { LocationGetter } from "../../../domain/primary-ports/city-location/city-location";
-import { LocationClient } from "../../../domain/secondary-ports/location-client/location-client.port";
+import { LocationGetter } from "../../../domain/primary-ports/city-location.port";
+import { LocationClient } from "../../../domain/secondary-ports/location-client.port";
 
-import { GetCityLocationByName } from "../../../domain/use-cases/get-city-location-by-name/get-city-location-by-name.use-case";
+import { GetCityLocationByName } from "../../../domain/use-cases/get-city-location-by-name/get-city-location-by-name";
 
 export class CliLocation implements LocationGetter {
   constructor(private readonly location: LocationClient) {}

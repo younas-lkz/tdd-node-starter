@@ -18,9 +18,9 @@ describe("Open Weather Location", () => {
     openWeatherLocation = new OpenWeatherLocation(deterministicHttpClient);
   });
 
-  describe("GIVEN the open weather location client", () => {
-    describe("WHEN I call it with London", () => {
-      it("THEN it should returns to me the London's coordinates", async () => {
+  describe("Given the open weather location client", () => {
+    describe("When I call it with London", () => {
+      test("Then it should returns to me the London's coordinates", async () => {
         const nextGetResult: OpenWeatherResult = [
           {
             lat: 51.509093,
@@ -41,8 +41,8 @@ describe("Open Weather Location", () => {
       });
     });
 
-    describe("WHEN I call it without an api key", () => {
-      it("THEN it should returns an error", async () => {
+    describe("When I call it without an api key", () => {
+      test("Then it should returns an error", async () => {
         const call = () =>
           openWeatherLocation.getCityLocationFromName("London");
 
