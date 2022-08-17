@@ -1,4 +1,4 @@
-import { DeterministicHttpClient } from "../../../../shared/secondary-adapters/http-client/deterministic-http-client";
+import { DeterministicHttpClient } from "../../http-client/deterministic-http-client";
 
 import { Location } from "../../../domain/models/location.model";
 

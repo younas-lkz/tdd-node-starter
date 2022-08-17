@@ -1,4 +1,4 @@
-import { HttpClient } from "../../../../shared/secondary-ports/http-client/http-client.port";
+import { HttpClient } from "../../../domain/secondary-ports/http-client/http-client.port";
 import { LocationClient } from "../../../domain/secondary-ports/location-client/location-client.port";
 
 import { Location } from "../../../domain/models/location.model";

@@ -1,5 +1,4 @@
-import { AxiosHttpClient } from "./shared/secondary-adapters/http-client/axios-http-client";
-// import { DeterministicHttpClient } from "./shared/secondary-adapters/http-client/deterministic-http-client";
+import { AxiosHttpClient } from "./weather/secondary-adapters/http-client/axios-http-client";
 
 import { LocationGetter } from "./weather/domain/primary-ports/city-location/city-location";
 import { CliLocation } from "./weather/primary-adapters/location/cli/cli-location";
