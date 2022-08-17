@@ -5,7 +5,7 @@ import { LocationClient } from "../../../domain/secondary-ports/location-client/
 
 import { GetCityLocationByName } from "../../../domain/use-cases/get-city-location-by-name/get-city-location-by-name.use-case";
 
-export class GuiLocation implements LocationGetter {
+export class CliLocation implements LocationGetter {
   constructor(private readonly location: LocationClient) {}
 
   getCityLocationByName(): void {
