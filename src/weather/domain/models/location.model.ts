@@ -1,4 +1,4 @@
-import { ValueObject } from "../../shared/ddd-tools/value-object";
+import { ValueObject } from "../../../shared/ddd-tools/value-object";
 
 interface LocationProps {
   longitude: number;

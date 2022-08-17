@@ -1,4 +1,4 @@
-import { LocationClient } from "../../secondary-port/location-client/location-client.port";
+import { LocationClient } from "../../secondary-ports/location-client/location-client.port";
 
 import { Weather } from "../../models/weather.model";
 

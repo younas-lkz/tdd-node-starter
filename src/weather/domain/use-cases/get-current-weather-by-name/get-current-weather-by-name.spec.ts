@@ -1,4 +1,4 @@
-import { InMemoryLocation } from "../../secondary-adapters/location-client/in-memory/in-memory-location";
+import { InMemoryLocation } from "../../../secondary-adapters/location-client/in-memory/in-memory-location";
 
 import { Weather } from "../../models/weather.model";
 

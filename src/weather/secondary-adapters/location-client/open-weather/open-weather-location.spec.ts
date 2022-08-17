@@ -1,6 +1,6 @@
 import { DeterministicHttpClient } from "../../../../shared/secondary-adapters/http-client/deterministic-http-client";
 
-import { Location } from "../../../models/location.model";
+import { Location } from "../../../domain/models/location.model";
 
 import { ApiKeyMissingError } from "./api-key-missing.error";
 
