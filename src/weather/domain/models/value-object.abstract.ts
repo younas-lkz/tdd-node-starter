@@ -8,10 +8,7 @@ export abstract class ValueObject<T extends object> {
   }
 
   public equals(vo?: ValueObject<T>): boolean {
-    if (vo === null || vo === undefined) {
-      return false;
-    }
-    if (vo.props === undefined) {
+    if (vo === null || vo === undefined || vo.props === undefined) {
       return false;
     }
     return shallowEqual(this.props, vo.props);
