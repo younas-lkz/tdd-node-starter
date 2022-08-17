@@ -1,5 +1,5 @@
-import { LocationGetter } from "../../location/domain/primary-ports/city-location.port";
-import { CliLocation } from "../../location/primary-adapters/location/cli/cli-location";
+import { LocationGetter } from "../../location/domain/primary-ports/location-getter.port";
+import { CliLocation } from "../../location/primary-adapters/cli/cli-location";
 import { AxiosHttpClient } from "../../location/secondary-adapters/http-client/axios-http-client";
 import { OpenWeatherLocation } from "../../location/secondary-adapters/location-client/open-weather/open-weather-location";
 
