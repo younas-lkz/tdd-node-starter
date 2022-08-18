@@ -1,4 +1,4 @@
-import { LocationGetter } from "./location/domain/primary-ports/location-getter.port";
+import { LocationGetter } from "../location/domain/primary-ports/location-getter.port";
 
 export class App {
   public constructor(private readonly locationGetter: LocationGetter) {}
