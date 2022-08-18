@@ -1,7 +1,7 @@
 import { InMemoryLocation } from "../../../secondary-adapters/location-client/in-memory/in-memory-location";
 import { Location } from "../../models/location.model";
 
-import { GetCityLocationByName } from "./get-city-location-by-name.use-case";
+import { GetCityLocationByName } from "./get-city-location-by-name";
 
 describe("Get city location by name", () => {
   let inMemoryLocationClient: InMemoryLocation;
