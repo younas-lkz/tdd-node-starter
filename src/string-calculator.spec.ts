@@ -3,6 +3,8 @@ import fc from "fast-check";
 import { Sut } from "./string-calculator.sut";
 import { StringCalculator } from "./string-calculator";
 
+fc.configureGlobal({ numRuns: 1000 });
+
 describe("String Calculator", () => {
   let sut: Sut;
   let stringCalculator: StringCalculator;
@@ -32,7 +34,7 @@ describe("String Calculator", () => {
     sut.givenNumbers((numbers) => {
       const separatedNumbers = sut.generateSeparatedNumbers(
         numbers,
-        sut.getDefaultSeparator
+        sut.getDefaultDelimiter
       );
 
       const sum = stringCalculator.add(separatedNumbers);
@@ -42,19 +44,19 @@ describe("String Calculator", () => {
     });
   });
 
-  it("Given numbers separated by a given separator When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
-    sut.givenNumbersAndSeparator((eachNumber, separator) => {
-      fc.pre(separator !== "-" && isNaN(+separator));
+  it("Given numbers separated by a given delimiter When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
+    sut.givenNumbersAndDelimiter((eachNumber, delimiter) => {
+      fc.pre(delimiter !== "-" && isNaN(+delimiter));
       const numbersString = sut.generateSeparatedNumbers(
         eachNumber,
-        () => separator
+        () => delimiter
       );
-      const numbersWithSeparatorInfo = sut.appendSeparatorInformation(
+      const numbersWithDelimiterInfo = sut.appendDelimiterInformation(
         numbersString,
-        separator
+        delimiter
       );
 
-      const sum = stringCalculator.add(numbersWithSeparatorInfo);
+      const sum = stringCalculator.add(numbersWithDelimiterInfo);
 
       const expectedResult = eachNumber.reduce((acc, cur) => acc + cur, 0);
       expect(sum).toEqual(expectedResult);

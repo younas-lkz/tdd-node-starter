@@ -21,24 +21,24 @@ export class Sut {
     );
   };
 
-  public givenNumbersAndSeparator = (
-    fun: (numbers: number[], separator: string) => void
+  public givenNumbersAndDelimiter = (
+    fun: (numbers: number[], delimiter: string) => void
   ) => {
     const integerArrayBuilder = fc.array(fc.integer({ min: -1000, max: 1000 }));
-    const separatorBuilder = fc.string({ minLength: 1, maxLength: 1 });
+    const delimiterBuilder = fc.string({ minLength: 1, maxLength: 1 });
 
     fc.assert(
       fc.property(
         integerArrayBuilder,
-        separatorBuilder,
-        (numbers, separator) => {
-          fun(numbers, separator);
+        delimiterBuilder,
+        (numbers, delimiter) => {
+          fun(numbers, delimiter);
         }
       )
     );
   };
 
-  public getDefaultSeparator = () =>
+  public getDefaultDelimiter = () =>
     this.randomFromInterval(0, 1) ? "," : "\n";
 
   private randomFromInterval = (min: number, max: number) => {
@@ -47,21 +47,21 @@ export class Sut {
 
   public generateSeparatedNumbers = (
     eachNumber: number[],
-    getSeparator: () => string
+    getDelimiter: () => string
   ) => {
     return eachNumber
       .reduce((acc, cur) => {
-        const separator = getSeparator();
+        const delimiter = getDelimiter();
 
-        return acc + `${cur}` + separator;
+        return acc + `${cur}` + delimiter;
       }, "")
       .slice(0, -1);
   };
 
-  public appendSeparatorInformation = (
+  public appendDelimiterInformation = (
     separatedNumbers: string,
-    separator: string
+    delimiter: string
   ) => {
-    return `//${separator}\n${separatedNumbers}`;
+    return `//${delimiter}\n${separatedNumbers}`;
   };
 }

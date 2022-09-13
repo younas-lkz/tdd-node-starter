@@ -1,14 +1,19 @@
+import { Delimiter } from "./delimiter";
+
 export class StringCalculator {
   private numbers!: string;
   private eachNumber!: number[];
-  private separator!: string | RegExp;
+  private delimiter!: string | RegExp;
 
   public add(numbers: string): number {
     this.numbers = numbers;
 
     if (this.numbers === "") return 0;
 
-    this.getSeparator();
+    const delimiter = Delimiter.create({ numbers: this.numbers });
+    this.delimiter = delimiter.getDelimiter();
+    this.numbers = delimiter.getNumbersWithoutDelimiter();
+
     this.getEachNumber();
 
     if (this.eachNumber.length === 1) return this.eachNumber[0];
@@ -16,26 +21,9 @@ export class StringCalculator {
     return this.addEachNumber();
   }
 
-  private getSeparator = () => {
-    const isSeparatorOverride = new RegExp("^//.*\\n").test(this.numbers);
-
-    if (isSeparatorOverride) {
-      this.separator = this.numbers.substring(
-        this.numbers.indexOf("//") + 2,
-        this.numbers.indexOf("\n")
-      );
-      this.numbers = this.numbers.slice(
-        this.numbers.indexOf("\n") + 1,
-        this.numbers.length
-      );
-    } else {
-      this.separator = /[\s,]+/;
-    }
-  };
-
   private getEachNumber = (): void => {
     this.eachNumber = this.numbers
-      .split(this.separator)
+      .split(this.delimiter)
       .map((number) => +number);
   };
 
