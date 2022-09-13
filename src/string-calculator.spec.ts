@@ -1,4 +1,4 @@
-import * as fc from "fast-check";
+import fc from "fast-check";
 
 import { Sut } from "./string-calculator.sut";
 import { StringCalculator } from "./string-calculator";
