@@ -1,18 +1,13 @@
 import { Delimiter } from "./delimiter";
 
 export class StringCalculator {
-  private numbers!: string;
   private eachNumber!: number[];
-  private delimiter!: string | RegExp;
+  private delimiter!: Delimiter;
 
   public add(numbers: string): number {
-    this.numbers = numbers;
+    if (numbers === "") return 0;
 
-    if (this.numbers === "") return 0;
-
-    const delimiter = Delimiter.create({ numbers: this.numbers });
-    this.delimiter = delimiter.getDelimiter();
-    this.numbers = delimiter.getNumbersWithoutDelimiter();
+    this.delimiter = Delimiter.create({ numbers });
 
     this.getEachNumber();
 
@@ -22,8 +17,9 @@ export class StringCalculator {
   }
 
   private getEachNumber = (): void => {
-    this.eachNumber = this.numbers
-      .split(this.delimiter)
+    this.eachNumber = this.delimiter
+      .getNumbersWithoutDelimiter()
+      .split(this.delimiter.getDelimiter())
       .map((number) => +number);
   };
 
