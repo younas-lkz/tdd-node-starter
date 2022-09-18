@@ -4,8 +4,8 @@ export class Sut {
   public givenNumbersAndDelimiter = (
     fun: (numbers: number[], delimiter: string) => void
   ) => {
-    const integerArrayBuilder = fc.array(fc.integer({ min: -1000, max: 1000 }));
-    const delimiterBuilder = fc.string({ minLength: 1, maxLength: 1 });
+    const integerArrayBuilder = fc.array(fc.integer());
+    const delimiterBuilder = fc.char();
 
     fc.assert(
       fc.property(
