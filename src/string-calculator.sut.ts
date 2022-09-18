@@ -1,26 +1,6 @@
-import * as fc from "fast-check";
+import fc from "fast-check";
 
 export class Sut {
-  public givenOneNumber = (fun: (nb: number) => void) => {
-    const integerBuilder: fc.Arbitrary<number> = fc.integer();
-
-    fc.assert(
-      fc.property(integerBuilder, (nb) => {
-        fun(nb);
-      })
-    );
-  };
-
-  public givenNumbers = (fun: (numbers: number[]) => void) => {
-    const integerArrayBuilder = fc.array(fc.integer());
-
-    fc.assert(
-      fc.property(integerArrayBuilder, (numbers) => {
-        fun(numbers);
-      })
-    );
-  };
-
   public givenNumbersAndDelimiter = (
     fun: (numbers: number[], delimiter: string) => void
   ) => {
@@ -34,27 +14,43 @@ export class Sut {
         (numbers, delimiter) => {
           fun(numbers, delimiter);
         }
-      )
+      ),
+      { numRuns: 1_000 }
     );
   };
 
-  public getDefaultDelimiter = () =>
+  public generateSeparatedNumbers = (
+    eachNumber: number[],
+    delimiter: string
+  ): string => {
+    if (delimiter.trim() === "") {
+      const defaultDelimiter = this.getDefaultDelimiter();
+
+      const separatedNumbers = this.getSeparatedNumbers(
+        eachNumber,
+        defaultDelimiter
+      );
+
+      return separatedNumbers;
+    }
+    const separatedNumbers = this.getSeparatedNumbers(eachNumber, delimiter);
+    return this.appendDelimiterInformation(separatedNumbers, delimiter);
+  };
+
+  private getDefaultDelimiter = () =>
     this.randomFromInterval(0, 1) ? "," : "\n";
 
   private randomFromInterval = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  public generateSeparatedNumbers = (
-    eachNumber: number[],
-    getDelimiter: () => string
-  ): string => {
+  private getSeparatedNumbers(eachNumber: number[], delimiter: string) {
     return eachNumber
-      .reduce((acc, cur) => `${acc}${cur}${getDelimiter()}`, "")
+      .reduce((acc, cur) => `${acc}${cur}${delimiter}`, "")
       .slice(0, -1);
-  };
+  }
 
-  public appendDelimiterInformation = (
+  private appendDelimiterInformation = (
     separatedNumbers: string,
     delimiter: string
   ) => {
