@@ -14,26 +14,12 @@ describe("String Calculator", () => {
     stringCalculator = new StringCalculator();
   });
 
-  it("Given numbers separated by comas or new line When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
-    sut.givenNumbers((numbers) => {
-      const separatedNumbers = sut.generateSeparatedNumbers(
-        numbers,
-        sut.getDefaultDelimiter
-      );
-
-      const sum = stringCalculator.add(separatedNumbers);
-
-      const expectedResult = numbers.reduce((acc, cur) => acc + cur, 0);
-      expect(sum).toEqual(expectedResult);
-    });
-  });
-
-  it("Given numbers separated by a given delimiter When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
+  it("Given numbers separated by delimiter When I add them Then I should get the sum", () => {
     sut.givenNumbersAndDelimiter((eachNumber, delimiter) => {
       fc.pre(delimiter !== "-" && isNaN(+delimiter));
       const numbersString = sut.generateSeparatedNumbers(
         eachNumber,
-        () => delimiter
+        () => delimiter ?? sut.getDefaultDelimiter()
       );
       const numbersWithDelimiterInfo = sut.appendDelimiterInformation(
         numbersString,
