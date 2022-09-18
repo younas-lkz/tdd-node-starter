@@ -48,13 +48,9 @@ export class Sut {
   public generateSeparatedNumbers = (
     eachNumber: number[],
     getDelimiter: () => string
-  ) => {
+  ): string => {
     return eachNumber
-      .reduce((acc, cur) => {
-        const delimiter = getDelimiter();
-
-        return acc + `${cur}` + delimiter;
-      }, "")
+      .reduce((acc, cur) => `${acc}${cur}${getDelimiter()}`, "")
       .slice(0, -1);
   };
 

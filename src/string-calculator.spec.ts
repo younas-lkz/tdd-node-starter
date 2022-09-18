@@ -3,7 +3,7 @@ import fc from "fast-check";
 import { Sut } from "./string-calculator.sut";
 import { StringCalculator } from "./string-calculator";
 
-fc.configureGlobal({ numRuns: 1000 });
+fc.configureGlobal({ numRuns: 1_000 });
 
 describe("String Calculator", () => {
   let sut: Sut;
@@ -12,22 +12,6 @@ describe("String Calculator", () => {
   beforeEach(() => {
     sut = new Sut();
     stringCalculator = new StringCalculator();
-  });
-
-  it("Given no number When I add the stringCalculator on it Then I should get zero", () => {
-    const sum = stringCalculator.add("");
-
-    expect(sum).toEqual(0);
-  });
-
-  it("Given one number When I add the stringCalculator on it Then I should get the given number", () => {
-    sut.givenOneNumber((nb) => {
-      const stringNb = `${nb}`;
-
-      const sum = stringCalculator.add(stringNb);
-
-      expect(sum).toEqual(nb);
-    });
   });
 
   it("Given numbers separated by comas or new line When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
