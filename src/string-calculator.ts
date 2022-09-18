@@ -1,4 +1,5 @@
 import { Delimiter } from "./delimiter";
+import { NegativeNotAllowed } from "./errors/negatives-not-allowed";
 
 export class StringCalculator {
   private eachNumber!: number[];
@@ -8,6 +9,7 @@ export class StringCalculator {
     this.delimiter = Delimiter.create({ numbers });
 
     this.getEachNumber();
+    this.checkIntegrity();
 
     return this.addEachNumber();
   }
@@ -17,6 +19,20 @@ export class StringCalculator {
       .getNumbersWithoutDelimiter()
       .split(this.delimiter.getDelimiter())
       .map(this.stringToNumber);
+  }
+
+  private checkIntegrity() {
+    const negativeNumbers: number[] = [];
+
+    this.eachNumber.forEach((num) => {
+      if (num < 0) {
+        negativeNumbers.push(num);
+      }
+    });
+
+    if (negativeNumbers.length !== 0) {
+      throw new NegativeNotAllowed(negativeNumbers);
+    }
   }
 
   private stringToNumber(n: string): number {
