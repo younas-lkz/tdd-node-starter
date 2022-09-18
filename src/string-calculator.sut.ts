@@ -1,23 +1,23 @@
 import fc from "fast-check";
 
 export class Sut {
-  public givenNumbersAndDelimiter = (
-    fun: (numbers: number[], delimiter: string) => void
-  ) => {
-    const integerArrayBuilder = fc.array(fc.integer());
-    const delimiterBuilder = fc.char();
+  public givenNumbersAndDelimiter =
+    (constraints?: { min?: number; max?: number }) =>
+    (fun: (numbers: number[], delimiter: string) => void) => {
+      const integerArrayBuilder = fc.array(fc.integer(constraints));
+      const delimiterBuilder = fc.char();
 
-    fc.assert(
-      fc.property(
-        integerArrayBuilder,
-        delimiterBuilder,
-        (numbers, delimiter) => {
-          fun(numbers, delimiter);
-        }
-      ),
-      { numRuns: 1_000 }
-    );
-  };
+      fc.assert(
+        fc.property(
+          integerArrayBuilder,
+          delimiterBuilder,
+          (numbers, delimiter) => {
+            fun(numbers, delimiter);
+          }
+        ),
+        { numRuns: 1_000 }
+      );
+    };
 
   public generateSeparatedNumbers = (
     eachNumber: number[],

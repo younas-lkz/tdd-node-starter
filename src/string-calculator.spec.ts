@@ -13,10 +13,14 @@ describe("String Calculator", () => {
     stringCalculator = new StringCalculator();
   });
 
-  it("Given numbers separated by a given delimiter When I add the stringCalculator on it Then I should get the sum of the numbers", () => {
-    sut.givenNumbersAndDelimiter((eachNumber, delimiter) => {
+  it("Given negative numbers When I add them Then I should get an error thrown", () => {
+    sut.givenNumbersAndDelimiter({
+      min: Number.MIN_SAFE_INTEGER,
+      max: Number.MAX_SAFE_INTEGER,
+    })((eachNumber, delimiter) => {
       fc.pre(!delimiter.includes("-") && isNaN(+delimiter));
       const numbersString = sut.generateSeparatedNumbers(eachNumber, delimiter);
+
       if (eachNumber.find((num) => num < 0)) {
         const run = () => stringCalculator.add(numbersString);
 
@@ -31,5 +35,22 @@ describe("String Calculator", () => {
         expect(sum).toEqual(expectedResult);
       }
     });
+  });
+
+  it("Given numbers separated by a delimiter When I add them Then I should get the sum", () => {
+    sut.givenNumbersAndDelimiter({ min: 0, max: Number.MAX_SAFE_INTEGER })(
+      (eachNumber, delimiter) => {
+        fc.pre(!delimiter.includes("-") && isNaN(+delimiter));
+        const numbersString = sut.generateSeparatedNumbers(
+          eachNumber,
+          delimiter
+        );
+        const sum = stringCalculator.add(numbersString);
+
+        const expectedResult = eachNumber.reduce((acc, cur) => acc + cur, 0);
+
+        expect(sum).toEqual(expectedResult);
+      }
+    );
   });
 });
