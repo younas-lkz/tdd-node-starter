@@ -5,25 +5,25 @@ export class StringCalculator {
   private delimiter!: Delimiter;
 
   public add(numbers: string): number {
-    if (numbers === "") return 0;
-
     this.delimiter = Delimiter.create({ numbers });
 
     this.getEachNumber();
 
-    if (this.eachNumber.length === 1) return this.eachNumber[0];
-
     return this.addEachNumber();
   }
 
-  private getEachNumber = (): void => {
+  private getEachNumber(): void {
     this.eachNumber = this.delimiter
       .getNumbersWithoutDelimiter()
       .split(this.delimiter.getDelimiter())
-      .map((number) => +number);
-  };
+      .map(this.stringToNumber);
+  }
 
-  private addEachNumber = (): number => {
+  private stringToNumber(n: string): number {
+    return +n;
+  }
+
+  private addEachNumber(): number {
     return this.eachNumber.reduce((acc, cur) => acc + cur, 0);
-  };
+  }
 }
